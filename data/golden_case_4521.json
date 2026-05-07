@@ -1,0 +1,151 @@
+{
+  "case_id": "CASE-4521",
+  "status": "new",
+  "assigned_to": "sarah.kim",
+  "customer": {
+    "customer_id": "CUST-ACME-001",
+    "entity_name": "Acme Consulting LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-4521",
+    "account_opened_at": "2026-03-20T11:30:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Consulting",
+    "stated_annual_revenue_usd": 120000,
+    "risk_rating": "low",
+    "prior_alert_count": 0,
+    "prior_sar_count": 0
+  },
+  "transactions": [
+    {
+      "transaction_id": "TXN-9001",
+      "customer_id": "CUST-ACME-001",
+      "account_id": "ACCT-4521",
+      "transaction_type": "wire",
+      "amount_usd": 9500,
+      "currency": "USD",
+      "timestamp": "2026-05-02T14:23:00Z",
+      "origin_country": "US",
+      "destination_country": "KY",
+      "beneficiary_name": "Ocean Holdings Ltd",
+      "beneficiary_bank": "Cayman National",
+      "beneficiary_swift": "CNATKYKY",
+      "device_id": "android-new-7788",
+      "ip_address": "187.45.10.24",
+      "channel": "online"
+    }
+  ],
+  "triggered_rules": [
+    {
+      "rule_id": "SAN-01",
+      "domain": "sanctions",
+      "rule_name": "OFAC SDN Fuzzy Match",
+      "description": "Beneficiary has a 92 percent fuzzy match to an SDN-listed entity with corroborating identifiers.",
+      "severity": 10,
+      "weight": 10,
+      "confidence": 0.92,
+      "evidence": [
+        "Beneficiary name resembles Ocean Holdings Ltd on watchlist fixture",
+        "SWIFT CNATKYKY matches watchlist fixture",
+        "Registration number KY-2019-08472 matches watchlist fixture",
+        "Director Viktor Petrov matches watchlist fixture"
+      ],
+      "regulatory_references": [
+        "31 CFR 501.603"
+      ]
+    },
+    {
+      "rule_id": "AML-01",
+      "domain": "aml",
+      "rule_name": "Structuring Detection",
+      "description": "Wire amount sits just below the USD 10,000 CTR threshold.",
+      "severity": 8,
+      "weight": 9,
+      "confidence": 0.81,
+      "evidence": [
+        "Transaction amount is USD 9,500",
+        "Amount is near configured structuring threshold"
+      ],
+      "regulatory_references": [
+        "31 CFR 1020.320"
+      ]
+    },
+    {
+      "rule_id": "FRAUD-03",
+      "domain": "fraud",
+      "rule_name": "Account Takeover Indicators",
+      "description": "New device, anomalous IP geography, and high-value wire occurred within minutes.",
+      "severity": 7,
+      "weight": 8,
+      "confidence": 0.74,
+      "evidence": [
+        "Device changed from iPhone to Android",
+        "Location changed from Chicago to Miami/VPN route",
+        "Failed MFA attempt before transaction"
+      ],
+      "regulatory_references": []
+    }
+  ],
+  "risk_score": {
+    "overall_score": 87,
+    "band": "critical",
+    "primary_domain": "aml",
+    "domain_scores": {
+      "aml": 87,
+      "fraud": 62,
+      "sanctions": 86,
+      "disputes": 15
+    },
+    "strengthening_factors": [
+      "SWIFT matches sanctions fixture",
+      "Registration number matches sanctions fixture",
+      "Director name matches sanctions fixture",
+      "Round-number transaction just below CTR threshold"
+    ],
+    "weakening_factors": [
+      "No prior SARs",
+      "Customer account has verified KYC"
+    ],
+    "missing_data_factors": [
+      "No device history beyond 90 days",
+      "No verified phone on file"
+    ]
+  },
+  "policy_recommendations": [
+    {
+      "policy_id": "POL-OFAC-001",
+      "regulation": "OFAC",
+      "title": "Potential SDN match requires immediate review",
+      "recommendation": "Block transaction and freeze assets if human reviewer confirms match. Do not notify customer while sanctions review is active.",
+      "severity": "critical",
+      "requires_human_confirmation": true,
+      "due_at": "2026-05-12T14:23:00Z",
+      "acknowledged": false
+    },
+    {
+      "policy_id": "POL-BSA-001",
+      "regulation": "BSA",
+      "title": "SAR filing may be required",
+      "recommendation": "Prepare SAR draft within 30 calendar days with all supporting evidence and analyst decision history.",
+      "severity": "warning",
+      "requires_human_confirmation": true,
+      "due_at": "2026-06-01T14:23:00Z",
+      "acknowledged": false
+    }
+  ],
+  "resolution_path": "investigate_and_act",
+  "timeline": [
+    "2026-03-20 11:30 Account opened at Chicago Downtown branch",
+    "2026-04-15 09:00 Payroll deposit USD 4,200 from TechCorp Inc",
+    "2026-05-02 14:15 Login from new device; failed MFA attempt",
+    "2026-05-02 14:22 Device and location anomaly detected",
+    "2026-05-02 14:23 USD 9,500 wire initiated to Ocean Holdings Ltd"
+  ],
+  "related_case_ids": [
+    "CASE-4519",
+    "CASE-4520"
+  ],
+  "notes": [],
+  "actions": [],
+  "created_at": "2026-05-02T14:23:30Z",
+  "updated_at": "2026-05-02T14:23:30Z"
+}
