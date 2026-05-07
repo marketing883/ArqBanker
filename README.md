@@ -24,6 +24,7 @@ The canonical demo case is `CASE-4521`.
 ## Repo Layout
 
 ```text
+SOUL.md               Product north star and end-to-end knowledge base
 backend/              FastAPI API, workflow, audit, evidence packages
 frontend/             Streamlit POC UI
 shared/               Shared schemas and constants used by every module
@@ -42,6 +43,14 @@ Developer 2 owns backend workflow, policy recommendations, audit, and evidence p
 Developer 3 owns the Streamlit analyst and CCO experience.
 
 All developers must use the models in `shared/schemas.py`. Do not create separate versions of Case, Transaction, RiskScore, AuditEvent, or EvidencePackage.
+
+Named starter assignments:
+
+```text
+docs/assignments/vijju.md
+docs/assignments/ashwanth.md
+docs/assignments/chaitanya.md
+```
 
 ## Quick Start
 
