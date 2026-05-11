@@ -1,6 +1,15 @@
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+# Streamlit runs this file as a script, so the repo root is not always on
+# sys.path. Add it explicitly so `frontend.api_client` works in local runs.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from frontend.api_client import (
     add_action,
