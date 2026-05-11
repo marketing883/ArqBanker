@@ -1,0 +1,123 @@
+{
+  "case_id": "CASE-4532",
+  "status": "assigned",
+  "assigned_to": "michael.torres",
+  "customer": {
+    "customer_id": "CUST-NOVA-032",
+    "entity_name": "Nova Imports LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-4532",
+    "account_opened_at": "2026-02-10T09:15:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Import Export",
+    "stated_annual_revenue_usd": 450000,
+    "risk_rating": "medium",
+    "prior_alert_count": 2,
+    "prior_sar_count": 0
+  },
+  "transactions": [
+    {
+      "transaction_id": "TXN-9032",
+      "customer_id": "CUST-NOVA-032",
+      "account_id": "ACCT-4532",
+      "transaction_type": "wire",
+      "amount_usd": 18500,
+      "currency": "USD",
+      "timestamp": "2026-05-04T16:45:00Z",
+      "origin_country": "US",
+      "destination_country": "AE",
+      "beneficiary_name": "Desert Star Trading FZE",
+      "beneficiary_bank": "Emirates Commercial Bank",
+      "beneficiary_swift": "EMCBAEAD",
+      "device_id": "windows-known-1132",
+      "ip_address": "98.214.18.77",
+      "channel": "online"
+    }
+  ],
+  "triggered_rules": [
+    {
+      "rule_id": "AML-02",
+      "domain": "aml",
+      "rule_name": "High-Risk Geography",
+      "description": "Wire destination requires enhanced review based on configured geography risk.",
+      "severity": 7,
+      "weight": 8,
+      "confidence": 0.78,
+      "evidence": [
+        "Destination country appears in enhanced review fixture",
+        "Transaction amount is materially above normal monthly average",
+        "Customer has two prior alerts in the last quarter"
+      ],
+      "regulatory_references": [
+        "31 CFR 1020.210"
+      ]
+    },
+    {
+      "rule_id": "AML-03",
+      "domain": "aml",
+      "rule_name": "Shell Company Indicators",
+      "description": "Business profile has incomplete supplier documentation and thin operating history.",
+      "severity": 6,
+      "weight": 7,
+      "confidence": 0.69,
+      "evidence": [
+        "Supplier invoice metadata is incomplete",
+        "Operating history is shorter than expected for claimed revenue",
+        "Registered address is shared with many entities"
+      ],
+      "regulatory_references": [
+        "31 CFR 1010.610"
+      ]
+    }
+  ],
+  "risk_score": {
+    "overall_score": 74,
+    "band": "high",
+    "primary_domain": "aml",
+    "domain_scores": {
+      "aml": 74,
+      "fraud": 22,
+      "sanctions": 18,
+      "disputes": 10
+    },
+    "strengthening_factors": [
+      "Prior alerts in the last quarter",
+      "Transaction amount above customer average",
+      "Destination requires enhanced review"
+    ],
+    "weakening_factors": [
+      "KYC is verified",
+      "Device is known"
+    ],
+    "missing_data_factors": [
+      "Supplier documentation incomplete",
+      "No independent invoice validation"
+    ]
+  },
+  "policy_recommendations": [
+    {
+      "policy_id": "POL-BSA-002",
+      "regulation": "BSA",
+      "title": "Enhanced due diligence review recommended",
+      "recommendation": "Review transaction purpose, supplier documentation, and related parties before disposition. Prepare SAR draft only if analyst confirms suspicious activity.",
+      "severity": "warning",
+      "requires_human_confirmation": true,
+      "due_at": "2026-06-03T16:45:00Z",
+      "acknowledged": false
+    }
+  ],
+  "resolution_path": "investigate_and_act",
+  "timeline": [
+    "2026-02-10 09:15 Account opened with verified business KYC",
+    "2026-04-02 10:30 Prior alert reviewed for invoice mismatch",
+    "2026-04-28 12:05 Prior alert reviewed for unusual counterparty",
+    "2026-05-04 16:45 USD 18,500 wire initiated to Desert Star Trading FZE"
+  ],
+  "related_case_ids": [
+    "CASE-4488"
+  ],
+  "notes": [],
+  "actions": [],
+  "created_at": "2026-05-04T16:45:30Z",
+  "updated_at": "2026-05-04T16:45:30Z"
+}

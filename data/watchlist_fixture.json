@@ -1,0 +1,18 @@
+[
+  {
+    "watchlist_id": "WL-OCEAN-001",
+    "listed_name": "Ocean Holdings Ltd",
+    "beneficiary_swift": "CNATKYKY",
+    "registration_number": "KY-2019-08472",
+    "director_name": "Viktor Petrov",
+    "regulatory_reference": "31 CFR 501.603"
+  },
+  {
+    "watchlist_id": "WL-BLUE-001",
+    "listed_name": "Blue Meridian Trading Limited",
+    "beneficiary_swift": "BMTLAEAD",
+    "registration_number": "AE-2021-77420",
+    "director_name": "Milan Petrovic",
+    "regulatory_reference": "31 CFR 501.603"
+  }
+]

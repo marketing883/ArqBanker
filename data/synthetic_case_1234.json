@@ -1,0 +1,159 @@
+{
+  "case_id": "CASE-1234",
+  "fixture_type": "synthetic_rule_engine_input",
+  "expected_generated_fields": [
+    "triggered_rules",
+    "risk_score",
+    "risk_band",
+    "primary_domain",
+    "domain_scores",
+    "strengthening_factors",
+    "weakening_factors",
+    "missing_data_factors"
+  ],
+  "customer": {
+    "customer_id": "CUST-RIVER-1234",
+    "entity_name": "Riverstone Digital LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-1234",
+    "account_opened_at": "2026-04-18T10:20:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Digital Marketing",
+    "stated_annual_revenue_usd": 90000,
+    "risk_rating": "medium",
+    "prior_alert_count": 1,
+    "prior_sar_count": 0,
+    "ubo": {
+      "name": "Elena Markovic",
+      "country": "RS",
+      "ownership_percent": 75,
+      "verified": false
+    },
+    "business_profile": {
+      "employee_count": 3,
+      "registered_address_type": "virtual_office",
+      "expected_monthly_wire_volume_usd": 12000,
+      "expected_counterparty_regions": [
+        "US",
+        "CA",
+        "GB"
+      ]
+    }
+  },
+  "transactions": [
+    {
+      "transaction_id": "TXN-1234-001",
+      "customer_id": "CUST-RIVER-1234",
+      "account_id": "ACCT-1234",
+      "transaction_type": "wire",
+      "amount_usd": 9800,
+      "currency": "USD",
+      "timestamp": "2026-05-08T13:10:00Z",
+      "origin_country": "US",
+      "destination_country": "AE",
+      "beneficiary_name": "Blue Meridian Trade Ltd",
+      "beneficiary_bank": "Anatolia Commercial Bank",
+      "beneficiary_swift": "ANCBTRIS",
+      "device_id": "unknown-windows-4491",
+      "ip_address": "185.220.101.42",
+      "channel": "online",
+      "purpose": "marketing services invoice"
+    },
+    {
+      "transaction_id": "TXN-1234-002",
+      "customer_id": "CUST-RIVER-1234",
+      "account_id": "ACCT-1234",
+      "transaction_type": "wire",
+      "amount_usd": 9700,
+      "currency": "USD",
+      "timestamp": "2026-05-09T09:35:00Z",
+      "origin_country": "US",
+      "destination_country": "AE",
+      "beneficiary_name": "Blue Meridian Trade Ltd",
+      "beneficiary_bank": "Anatolia Commercial Bank",
+      "beneficiary_swift": "ANCBTRIS",
+      "device_id": "unknown-windows-4491",
+      "ip_address": "185.220.101.42",
+      "channel": "online",
+      "purpose": "marketing services invoice"
+    }
+  ],
+  "login_events": [
+    {
+      "event_id": "LOGIN-1234-001",
+      "customer_id": "CUST-RIVER-1234",
+      "timestamp": "2026-05-08T12:52:00Z",
+      "device_id": "unknown-windows-4491",
+      "device_seen_before": false,
+      "ip_address": "185.220.101.42",
+      "ip_risk": "high",
+      "vpn_or_tor": true,
+      "country": "NL",
+      "mfa_result": "failed"
+    },
+    {
+      "event_id": "LOGIN-1234-002",
+      "customer_id": "CUST-RIVER-1234",
+      "timestamp": "2026-05-08T13:02:00Z",
+      "device_id": "unknown-windows-4491",
+      "device_seen_before": false,
+      "ip_address": "185.220.101.42",
+      "ip_risk": "high",
+      "vpn_or_tor": true,
+      "country": "NL",
+      "mfa_result": "passed"
+    }
+  ],
+  "watchlist_candidates": [
+    {
+      "candidate_id": "WL-1234-001",
+      "list_type": "sanctions_fixture",
+      "listed_name": "Blue Meridian Trading Limited",
+      "matched_name": "Blue Meridian Trade Ltd",
+      "name_match_score": 0.88,
+      "swift_match": false,
+      "registration_number_match": false,
+      "director_name_match": true,
+      "director_name": "Milan Petrovic",
+      "regulatory_reference": "31 CFR 501.603"
+    }
+  ],
+  "prior_alerts": [
+    {
+      "alert_id": "ALERT-1198",
+      "customer_id": "CUST-RIVER-1234",
+      "created_at": "2026-04-29T15:40:00Z",
+      "domain": "aml",
+      "summary": "Invoice description did not match customer stated industry.",
+      "disposition": "closed_no_sar"
+    }
+  ],
+  "geography_risk": {
+    "origin_country": "US",
+    "destination_country": "AE",
+    "destination_risk_level": "enhanced_review",
+    "reason": "Cross-border wires to a region outside stated expected counterparty profile."
+  },
+  "expected_rule_considerations": [
+    {
+      "rule_id": "AML-01",
+      "reason": "Two wire amounts are just below USD 10,000 within a short window."
+    },
+    {
+      "rule_id": "AML-02",
+      "reason": "Destination country requires enhanced review and is outside expected counterparty regions."
+    },
+    {
+      "rule_id": "AML-03",
+      "reason": "Virtual office, low employee count, incomplete UBO verification, and revenue/activity mismatch."
+    },
+    {
+      "rule_id": "SAN-01",
+      "reason": "Beneficiary name has an 88 percent fixture match and director name match, but no SWIFT or registration match."
+    },
+    {
+      "rule_id": "FRAUD-03",
+      "reason": "New device, high-risk VPN/Tor IP, failed MFA, then high-value wire activity."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "customer_id": "CUST-ACME-001",
+    "entity_name": "Acme Consulting LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-4521",
+    "account_opened_at": "2026-03-20T11:30:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Consulting",
+    "stated_annual_revenue_usd": 120000,
+    "risk_rating": "low",
+    "prior_alert_count": 0,
+    "prior_sar_count": 0
+  },
+  {
+    "customer_id": "CUST-RIVER-002",
+    "entity_name": "River North Dental PLLC",
+    "entity_type": "business",
+    "account_id": "ACCT-2002",
+    "account_opened_at": "2022-08-10T10:00:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Healthcare",
+    "stated_annual_revenue_usd": 850000,
+    "risk_rating": "low",
+    "prior_alert_count": 0,
+    "prior_sar_count": 0
+  },
+  {
+    "customer_id": "CUST-PACIFIC-003",
+    "entity_name": "Pacific Importers LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-3003",
+    "account_opened_at": "2024-11-18T15:45:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Wholesale Trade",
+    "stated_annual_revenue_usd": 1750000,
+    "risk_rating": "medium",
+    "prior_alert_count": 1,
+    "prior_sar_count": 0
+  },
+  {
+    "customer_id": "CUST-NOVA-004",
+    "entity_name": "Nova Advisory Group LLC",
+    "entity_type": "business",
+    "account_id": "ACCT-4004",
+    "account_opened_at": "2026-04-01T09:15:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Business Services",
+    "stated_annual_revenue_usd": 90000,
+    "risk_rating": "low",
+    "prior_alert_count": 0,
+    "prior_sar_count": 0
+  },
+  {
+    "customer_id": "CUST-LINA-005",
+    "entity_name": "Lina Patel",
+    "entity_type": "individual",
+    "account_id": "ACCT-5005",
+    "account_opened_at": "2023-01-12T13:00:00Z",
+    "kyc_status": "verified",
+    "stated_industry": "Software",
+    "stated_annual_revenue_usd": 165000,
+    "risk_rating": "low",
+    "prior_alert_count": 0,
+    "prior_sar_count": 0
+  }
+]
